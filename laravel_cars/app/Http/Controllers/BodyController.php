@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class BodyController extends Controller
 {
+    use ValidationRules;
     /**
      * Display a listing of the resource.
      */
@@ -30,6 +31,7 @@ class BodyController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate($this->getNameValidationRules());
         $body  = new Body();
         $body->name = $request->input('name');
         $body->save();
@@ -60,6 +62,7 @@ class BodyController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate($this->getNameValidationRules());
         $body  = Body::find($id);
         $body->name = $request->input('name');
         $body->save();

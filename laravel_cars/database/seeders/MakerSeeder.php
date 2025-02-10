@@ -10,14 +10,13 @@ class MakerSeeder extends Seeder
 {
     const ITEMS = [
         'Audi',
-        'Opel',
         'BMW',
-        'Tesla',
-        'Porshe',
-        'Lamborghini',
+        'Ferrari',
+        'Opel',
         'Suzuki',
-        'Toyota'
-];
+        'Toyota',
+        'Lamborghini'
+    ];
     /**
      * Run the database seeds.
      */
