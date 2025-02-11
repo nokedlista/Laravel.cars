@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Maker extends Model
 {
-    protected $fillable = ['id', 'timestamps', 'name', 'icon']; 
+    protected $fillable = ['name', 'logo'];
 }
