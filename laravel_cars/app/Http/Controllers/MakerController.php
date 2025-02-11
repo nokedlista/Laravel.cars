@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Maker;
 
 class MakerController extends Controller
 {
@@ -11,7 +12,8 @@ class MakerController extends Controller
      */
     public function index()
     {
-        //
+        $makers = Maker::all();
+        return view('makers.index', compact('makers'));
     }
 
     /**
@@ -19,7 +21,7 @@ class MakerController extends Controller
      */
     public function create()
     {
-        //
+        return view('makers.create');
     }
 
     /**
@@ -27,7 +29,11 @@ class MakerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $maker  = new Maker();
+        $maker->name = $request->input('name');
+        $maker->save();
+
+        return redirect()->route('makers.index')->with('success', "{$maker->name} sikeresen létrehozva");
     }
 
     /**
@@ -35,7 +41,8 @@ class MakerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $maker = Maker::find($id);
+        return view('makers.show', compact('maker'));
     }
 
     /**
@@ -43,7 +50,8 @@ class MakerController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $maker = Maker::find($id);
+        return view('makers.edit', compact('maker'));
     }
 
     /**
@@ -51,7 +59,11 @@ class MakerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $maker = Maker::find($id);
+        $maker->name = $request->input('name');
+        $maker->save();
+
+        return redirect()->route('makers.index')->with('success', "{$maker->name} sikeresen módosítva");
     }
 
     /**
@@ -59,6 +71,9 @@ class MakerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $maker = Maker::find($id);
+        $maker->delete();
+
+        return redirect()->route('makers.index')->with('success', "Sikeresen törölve");
     }
 }
