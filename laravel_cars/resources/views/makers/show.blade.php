@@ -5,9 +5,9 @@
 </div>
 
 @section('content')
-    <h1>"{{ $body->name }}" karosszéria</h1>
+    <h1>"{{ $maker->name }}" gyártó</h1>
     <div class="row">
-        <div>{{ $body->id }}</div>
-        <div>{{$body->name}}</div>
+        <div>{{ $maker->id }}</div>
+        <div>{{$maker->name}}</div>
     </div>
 @endsection 

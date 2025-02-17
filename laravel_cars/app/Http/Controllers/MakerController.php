@@ -30,7 +30,6 @@ class MakerController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate($this->getNameValidationRules());
         $maker  = new Maker();
         $maker->name = $request->input('name');
         $maker->save();
@@ -61,8 +60,7 @@ class MakerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate($this->getNameValidationRules());
-        $maker  = Maker::find($id);
+        $maker = Maker::find($id);
         $maker->name = $request->input('name');
         $maker->save();
 
@@ -74,7 +72,7 @@ class MakerController extends Controller
      */
     public function destroy(string $id)
     {
-        $maker  = Maker::find($id);
+        $maker = Maker::find($id);
         $maker->delete();
 
         return redirect()->route('makers.index')->with('success', "Sikeresen törölve");

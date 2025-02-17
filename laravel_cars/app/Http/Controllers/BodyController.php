@@ -3,19 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Body;
-use App\Traits\ValidationRules;
 use Illuminate\Http\Request;
 
 class BodyController extends Controller
 {
-    use ValidationRules;
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $bodies = Body::all();
-        return view('body.index', compact('bodies'));
+        return view('bodies.index', compact('bodies'));
     }
 
     /**
@@ -23,7 +18,7 @@ class BodyController extends Controller
      */
     public function create()
     {
-        return view('body.create');
+        return view('bodies.create');
     }
 
     /**
@@ -31,12 +26,11 @@ class BodyController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate($this->getNameValidationRules());
-        $body  = new Body();
-        $body->name = $request->input('name');
-        $body->save();
+        $bodies = new Body();
+        $bodies->name = $request->input('name');
+        $bodies->save();
 
-        return redirect()->route('bodies.index')->with('success', "{$body->name} sikeresen létrehozva");
+        return redirect()->route('bodies.index')->with('success', "{$bodies->name} sikeresen létrehozva");
     }
 
     /**
@@ -44,8 +38,8 @@ class BodyController extends Controller
      */
     public function show(string $id)
     {
-        $body = Body::find($id);
-        return view('body.show', compact('body'));
+        $bodies = Body::find($id);
+        return view('bodies.show', compact('bodies'));
     }
 
     /**
@@ -53,8 +47,8 @@ class BodyController extends Controller
      */
     public function edit(string $id)
     {
-        $body = Body::find($id);
-        return view('body.edit', compact('body'));
+        $bodies = Body::find($id);
+        return view('bodies.edit', compact('bodies'));
     }
 
     /**
@@ -62,12 +56,11 @@ class BodyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate($this->getNameValidationRules());
-        $body  = Body::find($id);
-        $body->name = $request->input('name');
-        $body->save();
+        $bodies = Body::find($id);
+        $bodies->name = $request->input('name');
+        $bodies->save();
 
-        return redirect()->route('bodies.index')->with('success', "{$body->name} sikeresen módosítva");
+        return redirect()->route('bodies.index')->with('success', "{$bodies->name} sikeresen módosítva");
     }
 
     /**
@@ -75,8 +68,8 @@ class BodyController extends Controller
      */
     public function destroy(string $id)
     {
-        $body  = Body::find($id);
-        $body->delete();
+        $bodies = Body::find($id);
+        $bodies->delete();
 
         return redirect()->route('bodies.index')->with('success', "Sikeresen törölve");
     }

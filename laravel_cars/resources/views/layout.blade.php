@@ -30,7 +30,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 Demény Máté</p>
+        <p>&copy; 2025 Demény Máté</p>
     </footer>
 
 </body>
