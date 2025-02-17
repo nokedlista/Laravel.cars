@@ -26,11 +26,11 @@ class BodyController extends Controller
      */
     public function store(Request $request)
     {
-        $bodies = new Body();
-        $bodies->name = $request->input('name');
-        $bodies->save();
+        $body = new Body();
+        $body->name = $request->input('name');
+        $body->save();
 
-        return redirect()->route('bodies.index')->with('success', "{$bodies->name} sikeresen létrehozva");
+        return redirect()->route('bodies.index')->with('success', "{$body->name} sikeresen létrehozva");
     }
 
     /**
@@ -38,8 +38,8 @@ class BodyController extends Controller
      */
     public function show(string $id)
     {
-        $bodies = Body::find($id);
-        return view('bodies.show', compact('bodies'));
+        $body = Body::find($id);
+        return view('bodies.show', compact('body'));
     }
 
     /**
@@ -47,8 +47,8 @@ class BodyController extends Controller
      */
     public function edit(string $id)
     {
-        $bodies = Body::find($id);
-        return view('bodies.edit', compact('bodies'));
+        $body = Body::find($id);
+        return view('bodies.edit', compact('body'));
     }
 
     /**
@@ -56,11 +56,11 @@ class BodyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $bodies = Body::find($id);
-        $bodies->name = $request->input('name');
-        $bodies->save();
+        $body = Body::find($id);
+        $body->name = $request->input('name');
+        $body->save();
 
-        return redirect()->route('bodies.index')->with('success', "{$bodies->name} sikeresen módosítva");
+        return redirect()->route('bodies.index')->with('success', "{$body->name} sikeresen módosítva");
     }
 
     /**
@@ -68,8 +68,8 @@ class BodyController extends Controller
      */
     public function destroy(string $id)
     {
-        $bodies = Body::find($id);
-        $bodies->delete();
+        $body = Body::find($id);
+        $body->delete();
 
         return redirect()->route('bodies.index')->with('success', "Sikeresen törölve");
     }
