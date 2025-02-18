@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Maker;
+use App\Http\Requests\BasicRequest;
 
 class MakerController extends Controller
 {
@@ -28,13 +29,12 @@ class MakerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BasicRequest $request)
     {
-        $maker  = new Maker();
-        $maker->name = $request->input('name');
-        $maker->save();
+        $maker = new Maker();
+        $maker->create($request->all());
 
-        return redirect()->route('makers.index')->with('success', "{$maker->name} sikeresen létrehozva");
+        return redirect()->route('bodies.index')->with('success', "{$maker->name} sikeresen létrehozva");
     }
 
     /**
@@ -58,13 +58,12 @@ class MakerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BasicRequest $request, string $id)
     {
-        $maker = Maker::find($id);
-        $maker->name = $request->input('name');
-        $maker->save();
+        $maker = Maker::findOrFail($id);
+        $maker->update($request->all());
 
-        return redirect()->route('makers.index')->with('success', "{$maker->name} sikeresen módosítva");
+        return redirect()->route('bodies.index')->with('success', "Sikeresen módosítva");
     }
 
     /**

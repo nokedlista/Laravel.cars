@@ -57,3 +57,209 @@ footer {
     width: 100%;
     bottom: 0;
 }
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+/* Sorok */
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Páratlan és páros sorok színezése */
+.row.even {
+    background-color: #f9f9f9;
+}
+
+.row.odd {
+    background-color: #ffffff;
+}
+
+/* Oszlopok */
+.col {
+    flex: 1;
+    text-align: center;
+}
+
+/* Jobb oldali oszlop (a gombok számára) */
+.right {
+    display: flex;
+    justify-content: space-evenly;
+    width: 200px;
+}
+
+/* Gombok */
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+button i {
+    margin-right: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Gombok egyes típusai */
+button .fa-binoculars {
+    color: #ffffff;
+}
+
+button .fa-edit {
+    color: #ff9800;
+}
+
+button .fa-trash-can {
+    color: #f44336;
+}
+
+/* Gombok törlésnél */
+button[name="btn-del-fuel"] {
+    margin-top: 10px; /* Ha szükséges, adj hozzá margót a gomb fölé */
+    padding: 10px 15px;
+    background-color: #f44336;
+}
+
+button[name="btn-del-fuel"]:hover {
+    background-color: #e53935;
+}
+
+/* Űrlapok */
+form {
+    margin: 0;
+}
+
+/* Képzés a hover effektre */
+.row:hover {
+    background-color: #f1f1f1;
+}
+
+/* Id oszlop */
+.col.id {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Az alapértelmezett figyelmeztető alert doboz stílusa */
+.alert {
+    background-color: #fff3cd; /* világos sárga háttér a figyelmeztetéshez */
+    border: 1px solid #ffeeba; /* világos sárga szegély */
+    color: #856404; /* sötétbarna szöveg */
+    padding: 15px;
+    border-radius: 5px; /* lekerekített sarkok */
+    font-family: Arial, sans-serif; /* betűtípus */
+    margin: 15px 0; /* margó a doboz körül */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* enyhe árnyék a doboz körül */
+}
+
+/* Figyelmeztető üzenet listája */
+.alert ul {
+    list-style-type: none; /* listajelzés eltávolítása */
+    padding-left: 0; /* eltávolítja a bal oldali behúzást */
+    margin: 0; /* margó eltávolítása */
+}
+
+/* A listában szereplő elemek stílusa */
+.alert ul li {
+    margin-bottom: 10px; /* egyes hibák között térköz */
+    font-size: 16px; /* szövegméret */
+    line-height: 1.5; /* sortáv */
+}
+
+/* Az egész űrlap stílusának beállítása */
+form[name="edit-form"] {
+    width: 100%;
+    max-width: 500px; /* maximális szélesség, hogy ne legyen túl széles */
+    margin: 0 auto; /* középre igazítás */
+    padding: 20px;
+    background-color: #f9f9f9; /* világos háttérszín */
+    border-radius: 8px; /* lekerekített sarkok */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* enyhe árnyék */
+    font-family: Arial, sans-serif; /* betűtípus */
+}
+
+/* A mezők, címkék és egyéb elemek közötti elrendezés */
+fieldset {
+    border: none; /* eltávolítjuk a mező körüli keretet */
+    margin-bottom: 15px; /* térköz a mezők között */
+    padding: 0;
+}
+
+/* Címkék stílusának beállítása */
+label {
+    display: block; 
+    margin-bottom: 5px; 
+    font-weight: bold;
+    font-size: 14px; 
+}
+
+/* A bemeneti mező stílusának beállítása */
+input[type="text"] {
+    width: 100%; /* az input mező legyen széles, hogy kitöltse a konténert */
+    padding: 10px;
+    border: 1px solid #ccc; /* világos szürke szegély */
+    border-radius: 4px; /* lekerekített sarkok */
+    font-size: 14px; /* betűméret */
+    margin-top: 5px; /* kis térköz a címke alatt */
+    box-sizing: border-box; /* hogy a padding ne növelje meg a szélességet */
+}
+
+/* A gombok stílusának beállítása */
+button[name="edit-bodies-btn"] {
+    background-color: #4CAF50; /* zöld háttér */
+    color: white; /* fehér szöveg */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px; /* lekerekített sarkok */
+    font-size: 16px;
+    cursor: pointer; /* mutatja, hogy a gomb kattintható */
+    margin-top: 10px; /* térköz a mező és a gomb között */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button[name="edit-bodies-btn"]:hover {
+    background-color: #45a049; /* sötétebb zöld szín a hover hatásra */
+}
+
+/* A "Mégse" link stílusának beállítása */
+a {
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none; 
+    color: #007bff; 
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+a:hover {
+    color: #0056b3; /* sötétebb kék szín a hover hatásra */
+}
+
+.container-edit-bodies {
+    display: flex;
+    justify-content: center; /* vízszintesen középre */
+    align-items: center; /* függőlegesen középre */
+}
+

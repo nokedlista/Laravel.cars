@@ -16,7 +16,9 @@
             <label for="name">Megnevezés</label>
             <input type="text" id="name" name="name">
         </fieldset>
-        <button type="submit">Ment</button>
+        <div class="container-edit-bodies">
+            <button type="submit">Ment</button>
+        </div>
         <a href="{{ route('bodies.index') }}">Mégse</a>
     </form>
 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Body;
 use Illuminate\Http\Request;
+use App\Http\Requests\BasicRequest;
 
 class BodyController extends Controller
 {
@@ -24,13 +25,12 @@ class BodyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BasicRequest $request)
     {
         $body = new Body();
-        $body->name = $request->input('name');
-        $body->save();
+        $body->create($request->all());
 
-        return redirect()->route('bodies.index')->with('success', "{$body->name} sikeresen létrehozva");
+        return redirect()->route('bodies.index')->with('success', "Sikeresen létrehozva");
     }
 
     /**
@@ -54,11 +54,10 @@ class BodyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BasicRequest $request, string $id)
     {
-        $body = Body::find($id);
-        $body->name = $request->input('name');
-        $body->save();
+        $body = Body::findOrFail($id);
+        $body->update($request->all());
 
         return redirect()->route('bodies.index')->with('success', "{$body->name} sikeresen módosítva");
     }
