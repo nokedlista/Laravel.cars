@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MakerController;
 use App\Http\Controllers\BodyController;
+use App\Http\Controllers\VehicleController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,3 +24,11 @@ Route::get('/bodies/{body}', [BodyController::class, 'show'])->name('bodies.show
 Route::patch('/bodies/{body}', [BodyController::class, 'update'])->name('bodies.update');
 Route::get('/bodies/{body}/edit', [BodyController::class, 'edit'])->name('bodies.edit');
 Route::delete('/bodies/{body}', [BodyController::class, 'destroy'])->name('bodies.destroy');
+
+Route::get('/vehicles', [VehicleController::class, 'index'])->name('vehicles.index');
+Route::post('/vehicles', [VehicleController::class, 'store'])->name('vehicles.store');
+Route::get('/vehicles/create', [VehicleController::class, 'create'])->name('vehicles.create');
+Route::get('/vehicles/{vehicle}', [VehicleController::class, 'show'])->name('vehicles.show');
+Route::patch('/vehicles/{vehicle}', [VehicleController::class, 'update'])->name('vehicles.update');
+Route::get('/vehicles/{vehicle}/edit', [VehicleController::class, 'edit'])->name('vehicles.edit');
+Route::delete('/vehicles/{vehicle}', [VehicleController::class, 'destroy'])->name('vehicles.destroy');

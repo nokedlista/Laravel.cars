@@ -133,13 +133,33 @@ button .fa-trash-can {
 }
 
 /* Gombok törlésnél */
-button[name="btn-del-fuel"] {
+button[name="btn-del-maker"] {
     margin-top: 10px; /* Ha szükséges, adj hozzá margót a gomb fölé */
     padding: 10px 15px;
     background-color: #f44336;
 }
 
-button[name="btn-del-fuel"]:hover {
+button[name="btn-del-maker"]:hover {
+    background-color: #e53935;
+}
+
+button[name="btn-del-body"] {
+    margin-top: 10px; /* Ha szükséges, adj hozzá margót a gomb fölé */
+    padding: 10px 15px;
+    background-color: #f44336;
+}
+
+button[name="btn-del-body"]:hover {
+    background-color: #e53935;
+}
+
+button[name="btn-del-vehicle"] {
+    margin-top: 10px; /* Ha szükséges, adj hozzá margót a gomb fölé */
+    padding: 10px 15px;
+    background-color: #f44336;
+}
+
+button[name="btn-del-vehicle"]:hover {
     background-color: #e53935;
 }
 

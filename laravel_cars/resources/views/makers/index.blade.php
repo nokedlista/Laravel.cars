@@ -18,7 +18,7 @@
 						<form action="{{ route('makers.destroy', $maker->id) }}" method="POST">
 							@csrf
 							@method('DELETE')
-							<button type="submit" name="btn-del-fuel"><i class="fa fa-trash-can trash" title="Töröl"></i>Töröl</button>
+							<button type="submit" name="btn-del-maker"><i class="fa fa-trash-can trash" title="Töröl"></i>Töröl</button>
 						</form>
 					</div>
 			</div>
