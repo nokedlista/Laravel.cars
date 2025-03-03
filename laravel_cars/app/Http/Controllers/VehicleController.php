@@ -55,7 +55,9 @@ class VehicleController extends Controller
     public function edit(string $id)
     {
         $vehicle = Vehicle::find($id);
-        return view('vehicles.edit', compact('vehicle'));
+        $makers = Maker::all();
+        $bodies = Body::all();
+        return view('vehicles.edit', compact('vehicle', 'makers', 'bodies'));
     }
 
     /**
