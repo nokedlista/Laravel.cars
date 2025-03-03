@@ -16,6 +16,7 @@
                 <input type="text" id="registration_number" name="registration_number" required value="{{ old('registration_number', $vehicle->registration_number) }}">
                 <label for="VIN">Jármű azonosító</label>
                 <input type="text" id="VIN" name="VIN" required value="{{ old('VIN', $vehicle->VIN) }}">
+                <label for="maker_ID">A gyártó ID-je</label>
                 <select name="maker_ID" id="maker_ID">
                     @foreach($makers as $maker)
                         <?php
@@ -31,6 +32,7 @@
                     @endforeach
                 </select>
                     </br>
+                <label for="body_ID">Az alváz ID-je</label>
                 <select name="body_ID" id="body_ID">
                     @foreach($bodies as $body)
                         <?php
