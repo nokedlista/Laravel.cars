@@ -27,60 +27,43 @@ class Install extends Command
      */
     public function handle(): void
     {
-        $path = $this->laravel->databasePath().DIRECTORY_SEPARATOR.'seeders';
-        $filecount = count(glob($path . "*"));
+        $servername = "localhost";
+        $name = "root";
+        $password = "";
+        $dbname = "laravel_cars";
 
-        $bar = $this->output->createProgressBar($filecount);
-        $bar->start();
-        Artisan::call('migrate');
-        $this->output->info('Migration complete!');
-        $bar->advance();
-
-
-
-
-
-
-
-
-
-        //LARAVEL FILE-AL
-        for($i = 0; $i < $filecount; $i++)
+        try
         {
-            $handle = opendir($path);
-            $file = readdir($handle);
-            $STDERR = fopen("php://stderr", "w");
-            fwrite($STDERR, "\n".$file."\n\n");
-            fclose($STDERR);
-            closedir($handle);
-
-            if ($handle = opendir($path)) {
-                while (false !== ($file = readdir($handle))) {
-                    if ('.' === $file) continue;
-                    if ('..' === $file) continue;
-                    $STDERR = fopen("php://stderr", "w");
-                    fwrite($STDERR, "\n".$file."\n\n");
-                    fclose($STDERR);
-                    // Artisan::call('db:seed --class=BodySeeder');
-                    
-                }
-                closedir($handle);
-            }
+            $conn = mysqli_connect($servername, $name, $password, $dbname);
         }
-        
-        
-        
+        catch(Exception $e)
+        {
+            $sql = "CREATE DATABASE IF NOT EXISTS laravel_cars";
+            if ($conn->query($sql) === TRUE) 
+            {
+                $path = $this->laravel->databasePath().DIRECTORY_SEPARATOR.'seeders';
+                $files = scandir($path);
+                $filecount = count(glob($path . "*"));
+                $bar = $this->output->createProgressBar($filecount);
+                $this->output->info('Database created!');
 
+                $bar->start();
+                Artisan::call('migrate');
+                $bar->advance();
+                $this->output->info('Migration complete!');
 
-        // Artisan::call('db:seed --class=BodySeeder');
-        // $this->output->info('BodySeeder complete!');
-        // $bar->advance();
+                foreach ($files as $fill) 
+                {
+                    $file = strpos($fill, '.');
+                    Artisan::call('db:seed --class='.$file);
+                    $bar->advance();
+                    $this->output->info($file.' complete!');
+                }
+                $bar->finish();
+                $this->output->info('Install complete!');
 
-        // Artisan::call('db:seed --class=MakerSeeder');
-        // $bar->advance();
-        // $this->output->info('MakerSeeder complete!');
-
-        // $bar->finish();
-        // $this->output->info('Install complete!');
+                mysqli_close($conn);
+            } 
+        }
     }
 }
