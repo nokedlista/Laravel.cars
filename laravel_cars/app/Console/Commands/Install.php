@@ -30,16 +30,12 @@ class Install extends Command
         $servername = "localhost";
         $name = "root";
         $password = "";
-        $dbname = "laravel_cars";
 
-        try
-        {
-            $conn = mysqli_connect($servername, $name, $password, $dbname);
-        }
-        catch(Exception $e)
+        $conn = mysqli_connect($servername, $name, $password);
+        if($conn->connect_error)
         {
             $sql = "CREATE DATABASE IF NOT EXISTS laravel_cars";
-            if ($conn->query($sql) === TRUE) 
+            if ($conn->query($sql) === TRUE)
             {
                 $path = $this->laravel->databasePath().DIRECTORY_SEPARATOR.'seeders';
                 $files = scandir($path);
@@ -64,6 +60,10 @@ class Install extends Command
 
                 mysqli_close($conn);
             } 
+        }
+        else
+        {
+            $this->output->info('Database already exists!');
         }
     }
 }
