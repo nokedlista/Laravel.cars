@@ -32,38 +32,41 @@ class Install extends Command
         $password = "";
 
         $conn = mysqli_connect($servername, $name, $password);
-        if($conn->connect_error)
-        {
-            $sql = "CREATE DATABASE IF NOT EXISTS laravel_cars";
-            if ($conn->query($sql) === TRUE)
-            {
-                $path = $this->laravel->databasePath().DIRECTORY_SEPARATOR.'seeders';
-                $files = scandir($path);
-                $filecount = count(glob($path . "*"));
-                $bar = $this->output->createProgressBar($filecount);
-                $this->output->info('Database created!');
-
-                $bar->start();
-                Artisan::call('migrate');
-                $bar->advance();
-                $this->output->info('Migration complete!');
-
-                foreach ($files as $fill) 
-                {
-                    $file = strpos($fill, '.');
-                    Artisan::call('db:seed --class='.$file);
-                    $bar->advance();
-                    $this->output->info($file.' complete!');
-                }
-                $bar->finish();
-                $this->output->info('Install complete!');
-
-                mysqli_close($conn);
-            } 
-        }
-        else
+        $sql = "SELECT SCHEMA_NAME
+        FROM INFORMATION_SCHEMA.SCHEMATA
+        WHERE SCHEMA_NAME = 'laravel_cars';";
+        if($conn->query($sql)->num_rows > 0)
         {
             $this->output->info('Database already exists!');
+            return;
         }
+        $sql = "CREATE DATABASE IF NOT EXISTS laravel_cars";
+        if ($conn->query($sql) === TRUE)
+        {
+            $path = $this->laravel->databasePath().DIRECTORY_SEPARATOR.'seeders';
+            $files = scandir($path, 1);
+            $filecount = count($files)-2;
+            array_splice($files, $filecount, 2);
+            $bar = $this->output->createProgressBar($filecount+1);
+            $this->output->info('Database created!');
+
+            $bar->start();
+            Artisan::call('migrate');
+            $bar->advance();
+            $this->output->info('Migration complete!');
+
+            foreach ($files as $fill) 
+            {
+                $file = substr($fill, 0, strlen($fill)-4);
+                Artisan::call('db:seed --class='.$file);
+
+                $bar->advance();
+                $this->output->info($file.' complete!');
+            }
+            $bar->finish();
+            $this->output->info('Install complete!');
+
+            mysqli_close($conn);
+        } 
     }
 }
